@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import RecipeModal from "./RecipeModal";
-import AddRecipeForm from "./AddRecipeForm";
+import React, { useState, lazy, Suspense } from "react";
+// import RecipeModal from "./RecipeModal";
+// import AddRecipeForm from "./AddRecipeForm";
+
+const LazyRecipeModal = lazy(() => import("./RecipeModal"));
+const LazyAddRecipeForm = lazy(() => import("./AddRecipeForm"));
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([
@@ -173,23 +176,31 @@ const RecipeList = () => {
 
   return (
     <div className="recipe-list">
-      <AddRecipeForm addRecipe={addRecipe} />
-      <div className="recipe-items">
-        {recipes.map((recipe, index) => (
-          <div
-            key={index}
-            className="recipe-item"
-            onClick={() => openModal(recipe)}
-          >
-            <h3>{recipe.name}</h3>
-          </div>
-        ))}
-      </div>
-      <RecipeModal
-        isOpen={selectedRecipe !== null}
-        closeModal={closeModal}
-        recipe={selectedRecipe}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyAddRecipeForm addRecipe={addRecipe} />
+        {/* <AddRecipeForm addRecipe={addRecipe} /> */}
+        <div className="recipe-items">
+          {recipes.map((recipe, index) => (
+            <div
+              key={index}
+              className="recipe-item"
+              onClick={() => openModal(recipe)}
+            >
+              <h3>{recipe.name}</h3>
+            </div>
+          ))}
+        </div>
+        {/* <RecipeModal
+          isOpen={selectedRecipe !== null}
+          closeModal={closeModal}
+          recipe={selectedRecipe}
+        /> */}
+        <LazyRecipeModal
+          isOpen={selectedRecipe !== null}
+          closeModal={closeModal}
+          recipe={selectedRecipe}
+        />
+      </Suspense>
     </div>
   );
 };
