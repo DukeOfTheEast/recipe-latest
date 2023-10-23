@@ -71,7 +71,7 @@ button:hover {
 
 .logo {
   background-color: #4caf50;
-  padding: 20px;
+  padding: 20px 80px;
   color: white;
 }
 
@@ -79,4 +79,20 @@ button:hover {
   background-color: #4caf50;
   color: white;
   padding: 20px;
+}
+
+.vision {
+  display: flex;
+  padding: 20px 80px;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  gap: 30px;
+  border-bottom: 1px solid rgb(212, 211, 211);
+}
+
+.vision img {
+  width: 1200px;
+  height: 400px;
+  border-radius: 0px 40px 0px 40px;
 }
