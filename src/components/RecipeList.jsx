@@ -181,7 +181,7 @@ const RecipeList = () => {
             className="recipe-item"
             onClick={() => openModal(recipe)}
           >
-            <h2>{recipe.name}</h2>
+            <h3>{recipe.name}</h3>
           </div>
         ))}
       </div>
